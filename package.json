@@ -1,0 +1,17 @@
+{
+  "name": "log-watcher",
+  "version": "0.0.0",
+  "description": "Log watcher tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Deepali Gandhi",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "nconf": "~0.7.1",
+    "mailgun-js": "~0.6.9",
+    "tail": "~0.4.0",
+    "nlogger": "~1.0.0"
+  }
+}
