@@ -1,11 +1,10 @@
-Tail = require('tail').Tail;
-var config = require('./config');
-var email = require('./email.js');
-var logger = require('nlogger').logger(module);
-
-var fileToTail = config.get("logFile");
-var blackList = ["ERROR", "WARN"];
-var whiteList = ["INFO", "Config"];
+var Tail = require('tail').Tail
+  , config = require('./config')
+  , email = require('./email.js')
+  , logger = require('nlogger').logger(module);
+  , fileToTail = config.get("logFile");
+  , blackList = config.get("blackList");
+  , whiteList = config.get("whiteList");
 
 tail = new Tail(fileToTail);
 logger.info("tail initialized");
@@ -15,14 +14,12 @@ tail.on("line", function(data) {
   var whiteListRegex = new RegExp(whiteList.join('|'));
   var errFound = data.match(blackListRegex);
   var allowed = data.match(whiteListRegex);
-  if(!allowed){
-    if (errFound){
+  if(errFound && !allowed){
       email.sendEmail(data, function(err, body){
         if(err){
           logger.error("Error sending email!")
         }
       });
-    }
     logger.info("Found error messages: ", data);
   }
 });

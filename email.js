@@ -1,19 +1,18 @@
-var config = require("./config");
-var apiKey = config.get("mailgun:api_key");
-var domain = config.get("mailgun:domain");
-var mailgunFrom = config.get("mailgun:from");
-var mailgun = require('mailgun-js')({apiKey: apiKey, domain: domain});
-var logger = require('nlogger').logger(module);
-var adminEmail = config.get("adminEmail");
+var config = require("./config")
+    , apiKey = config.get("mailgun:api_key")
+    , domain = config.get("mailgun:domain")
+    , mailgunFrom = config.get("mailgun:from")
+    , mailgun = require('mailgun-js')({apiKey: apiKey, domain: domain})
+    , logger = require('nlogger').logger(module)
+    , adminEmail = config.get("adminEmail");
 
 var email = exports;
 email.sendEmail = function(data, done) {
-    var body = data;
     var message = {
       from: mailgunFrom,
       to: adminEmail,
       subject: 'Server error',
-      text: body
+      text: data
     };
     mailgun.messages().send(message, function (err, body) {
       if(err) {

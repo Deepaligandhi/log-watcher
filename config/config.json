@@ -5,5 +5,8 @@
     "from": "postmaster@sandbox76c83801599445239c982511f8776837.mailgun.org"
   },
   "adminEmail": "deepali.gandhi@gmail.com",
-  "logFile": "./../telegram-server/server.log"
+  "logFile": "./../telegram-server/server.log",
+  "blackList": ["ERROR", "WARN"],
+  "whiteList": ["INFO", "Config"]
+
 }
